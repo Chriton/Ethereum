@@ -4,6 +4,7 @@ const ganache = require('ganache-cli');
 // Web3 is a constructor
 const Web3 = require('web3');
 const web3 = new Web3(ganache.provider());
+const { interface, bytecode } = require('../compile');
 
 // start mocha Example
 // class Car {
@@ -32,3 +33,25 @@ const web3 = new Web3(ganache.provider());
 //     })
 // });
 // end mocha Example
+
+
+let accounts;
+let inbox;
+
+beforeEach(async () => {
+    // Get a list of all the accounts
+    accounts = await web3.eth.getAccounts();
+
+    // Use one of those accounts to deploy the contract
+    inbox = await new web3.eth.Contract(JSON.parse(interface))
+      .deploy({ data: bytecode, arguments: ['Hi there!'] })
+      .send({ from: accounts[0], gas: '1000000' })
+});
+
+
+describe('Inbox', () => {
+    it('deploys a contract', () => {
+        //console.log(accounts);
+        console.log(inbox);
+    })
+});
