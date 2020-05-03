@@ -26,15 +26,11 @@ beforeEach(async () => {
         from: accounts[0],
         gas: '1000000'
       });
-
-      //inbox.setProvider(provider);
 });
 
 
 describe('Inbox', () => {
     it('deploys a contract', () => {
-        //console.log(accounts);
-        //console.log(inbox);
         assert.ok(inbox.options.address);
     });
 
@@ -44,14 +40,14 @@ describe('Inbox', () => {
     });
 
     it('can change the message', async () => {
-      // TODO - set new message
-      await inbox.methods.setMessage('bye')
+      const NEW_MESSAGE = 'bye';
+      await inbox.methods.setMessage(NEW_MESSAGE)
       .send({
         from: accounts[0],
         gas: '1000000'
       })
 
       const message = await inbox.methods.message().call();
-      assert.equal(message, 'bye');
+      assert.equal(message, NEW_MESSAGE);
     });
 });
