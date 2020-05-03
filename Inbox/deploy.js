@@ -2,7 +2,10 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
 
+// first smart contract 0xeadafa6fcd476fdff8f36f3e0151bcd6876e3364
+
 const provider = new HDWalletProvider(
+  // random test account
   'tone awake sniff layer minor moral blood museum misery quick upset nut',
   'https://rinkeby.infura.io/v3/c10af4d6d6494f78a76664959d68d6d8'
 );
