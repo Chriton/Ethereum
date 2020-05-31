@@ -1,7 +1,6 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
-// first smart contract on rinkeby 0xeadafa6fcd476fdff8f36f3e0151bcd6876e3364
 
 const provider = new HDWalletProvider(
   // random test account
@@ -16,7 +15,7 @@ const deploy = async () => {
   console.log('Attempting to deploy from account', accounts[0]);
 
   const result = await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({ data: '0x' + bytecode, arguments: ['Hi there!'] })
+    .deploy({ data: '0x' + bytecode })
     .send({ gas: '1000000', from: accounts[0] });
   console.log('Contract deployed to', result.options.address);
 };
